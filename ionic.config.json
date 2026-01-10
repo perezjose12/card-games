@@ -1,0 +1,7 @@
+{
+  "name": "card_games",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

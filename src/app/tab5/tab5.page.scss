@@ -1,0 +1,12 @@
+.theme-toggle {
+  --handle-background: #fff;
+  --background-checked: #3dc2ff;
+  transition: all 0.3s ease-in-out;
+}
+
+.theme-icon {
+  font-size: 1.4em;
+  margin-left: 8px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: var(--ion-color-primary);
+}

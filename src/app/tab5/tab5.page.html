@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Configuration
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item lines="none">
+    <ion-label>Cambiar apariencia</ion-label>
+    <ion-toggle slot="end" (ionChange)="toggleTheme($event)" [checked]="darkMode" class="theme-toggle">
+    </ion-toggle>
+    <ion-icon slot="end" [name]="darkMode ? 'moon' : 'sunny'" class="theme-icon"></ion-icon>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>Idioma</ion-label>
+    <ion-select [(ngModel)]="selectedLang" (ionChange)="onLangChange($event)">
+      <ion-select-option value="en">Inglés</ion-select-option>
+      <ion-select-option value="pt">Portugués</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <p style="padding-left: 18px;"> © Rohyller Pereira - 2025</p>
+  <app-explore-container name="Tab 4 page"></app-explore-container>
+</ion-content>

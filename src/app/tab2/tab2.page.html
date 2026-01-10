@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Edit or delete
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" #content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-right: 8px">
+    <ion-fab-button (click)="scrollToTop()">
+      <ion-icon name="arrow-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div>
+    <ion-searchbar placeholder="Buscar palabra" [(ngModel)]="searchTerm" (ionInput)="filtrarPalabras()"
+      debounce="100"></ion-searchbar>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="ordenar('asc')">Asc</ion-button>
+      <ion-button (click)="ordenar('desc')">Desc</ion-button>
+      <ion-button (click)="scrollToBottom()">
+        <ion-icon name="arrow-down"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let palabra of palabras">
+      <ion-label>
+        <h2>{{ palabra.word }}</h2>
+        <p>{{ palabra.translation }}</p>
+      </ion-label>
+      <ion-button fill="clear" color="primary" (click)="editarPalabra(palabra)">
+        Editar
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="eliminarPalabra(palabra)">
+        Eliminar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <app-explore-container name="Tab 2 page"></app-explore-container>
+</ion-content>

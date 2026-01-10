@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Add
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <form (ngSubmit)="saveData()" #wordForm="ngForm">
+    <ion-item>
+      <ion-input label="Word" labelPlacement="floating" placeholder="Enter text" name="word" [(ngModel)]="formData.word" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Translation" labelPlacement="floating" placeholder="Enter text" name="translation" [(ngModel)]="formData.translation" required></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" [disabled]="!wordForm.form.valid">Save</ion-button>
+  </form>
+
+  <app-explore-container name="Tab 3 page"></app-explore-container>
+</ion-content>
