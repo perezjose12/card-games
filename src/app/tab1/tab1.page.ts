@@ -127,6 +127,10 @@ export class Tab1Page implements OnInit {
     palavra.favorite = !palavra.favorite;
     this.palabrasService.updatePalavra(palavra, false);
   }
+  toggleNeedPractice(palavra: any) {
+    palavra.needs_work = !palavra.needs_work;
+    this.palabrasService.updatePalavra(palavra, false);
+  }
   changeLanguage() {
     this.languajeChange = !this.languajeChange;
   }
@@ -137,6 +141,11 @@ export class Tab1Page implements OnInit {
   }
   showFavorites() {
     this.palabras = this.palabrasCopy.filter(palavra => palavra.favorite);
+    this.currentIndex = 0;
+    this.palabras = this.shuffleArray(this.palabras);
+  }
+  showNeedPractice() {
+    this.palabras = this.palabrasCopy.filter(palavra => palavra.needs_work);
     this.currentIndex = 0;
     this.palabras = this.shuffleArray(this.palabras);
   }
@@ -158,6 +167,9 @@ export class Tab1Page implements OnInit {
         break;
       case 'last50':
         this.show50Last();
+        break;
+      case 'needPractice':
+        this.showNeedPractice();
         break;
       case 'favorites':
         this.showFavorites();

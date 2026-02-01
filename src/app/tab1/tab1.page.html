@@ -29,6 +29,9 @@
         <ion-button (click)="toggleFavorite(currentWord)" class="btn-heart">
           <ion-icon [name]="currentWord?.favorite ? 'heart-dislike' : 'heart'"></ion-icon>
         </ion-button>
+        <ion-button (click)="toggleNeedPractice(currentWord)" class="btn-need-practice">
+          <ion-icon [name]="currentWord?.needs_work ? 'alert-circle' : 'alert-circle-outline'"></ion-icon>
+        </ion-button>
       </ion-card-content>
     </ion-card>
 
@@ -57,6 +60,7 @@
         <ion-select-option value="halfLast">Last half</ion-select-option>
         <ion-select-option value="last100">Last 100</ion-select-option>
         <ion-select-option value="last50">Last 50</ion-select-option>
+        <ion-select-option value="needPractice">Need Practice</ion-select-option>
         <ion-select-option value="favorites">Favorites</ion-select-option>
       </ion-select>
       <ion-button (click)="changeLanguage()" style="margin-top: 20px" color="secondary">Language</ion-button>

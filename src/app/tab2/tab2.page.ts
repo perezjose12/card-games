@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PalabrasService } from '../core/services/palavras-service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
+import { EditPalabraModalComponent } from '../modals/edit-palabra-modal/edit-palabra-modal.component'; // import del modal
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -20,7 +21,7 @@ export class Tab2Page implements OnInit {
   palabras: any[] = [];
   palabrasFiltradas: any[] = [];
   searchTerm: string = '';
-  constructor(private palabrasService: PalabrasService, private alertController: AlertController) { }
+  constructor(private palabrasService: PalabrasService, private alertController: AlertController, private modalCtrl: ModalController) { }
   ngOnInit() {
     this.palabrasService.palabras$.subscribe({
       next: (data) => {
@@ -32,45 +33,27 @@ export class Tab2Page implements OnInit {
       }
     });
   }
+   toggleNeedPractice(palavra: any) {
+    palavra.needs_work = !palavra.needs_work;
+    this.palabrasService.updatePalavra(palavra, false);
+  }
+   toggleFavorite(palavra: any) {
+    palavra.favorite = !palavra.favorite;
+    this.palabrasService.updatePalavra(palavra, false);
+  }
   async editarPalabra(palabra: any) {
-    const alert = await this.alertController.create({
-      header: 'Editar palabra',
-      inputs: [
-        {
-          name: 'word',
-          type: 'text',
-          placeholder: 'Palabra',
-          value: palabra.word
-        },
-        {
-          name: 'translation',
-          type: 'text',
-          placeholder: 'Traducción',
-          value: palabra.translation
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Guardar',
-          handler: (data) => {
-            const actualizada = {
-              ...palabra,
-              word: data.word,
-              translation: data.translation
-            };
-            this.palabrasService.updatePalavra(actualizada).subscribe();
-          }
-        }
-      ]
+    const modal = await this.modalCtrl.create({
+      component: EditPalabraModalComponent,
+      componentProps: { palabra }
     });
 
-    await alert.present();
-  }
+    await modal.present();
 
+    const { data } = await modal.onDidDismiss();
+    if (data?.updated) {
+      this.filtrarPalabras(); // refresca la lista si hubo cambios
+    }
+  }
   async eliminarPalabra(palabra: any) {
     const alert = await this.alertController.create({
       header: '¿Eliminar palabra?',

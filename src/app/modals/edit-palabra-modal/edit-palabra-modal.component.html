@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar palabra</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">✕</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Palabra</ion-label>
+    <ion-input [(ngModel)]="palabra.word"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Traducción</ion-label>
+    <ion-input [(ngModel)]="palabra.translation"></ion-input>
+  </ion-item>
+<ion-button color="primary" expand="block" (click)="save()" fill="outline" class="ion-padding-top">
+  Guardar
+</ion-button>
+
+<ion-button expand="block" (click)="toggleNeedsWork()"  class="ion-padding-top">
+  {{ palabra.needs_work ? 'Quitar Needs Work' : 'Needs Work' }}
+</ion-button>
+
+<ion-button expand="block" (click)="toggleFavorite()"  class="ion-padding-top">
+  {{ palabra.favorite ? 'Quitar Favorite' : 'Favorite' }}
+</ion-button>
+
+<ion-button color="danger" expand="block" (click)="delete()" fill="outline" class="ion-padding-top">
+  Eliminar
+</ion-button>
+
+  
+</ion-content>
